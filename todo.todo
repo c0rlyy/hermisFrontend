@@ -1,0 +1,1 @@
+find . -type f -print0 | grep -zEv '^./(target|.git|Cargo.lock|hermisFront/node_modules|hermisFront/package-lock.json|hermisFront/src/output.css)' | xargs -0 wc -l
