@@ -8,7 +8,7 @@ import { CustomApiError, LoginPayload } from "../features/types";
 
 function LandingPage() {
   const navigate = useNavigate();
-  const { formState, handleChange, setFormState } = useFormState({
+  const { formState, handleChange } = useFormState({
     email: "",
     password: "",
   });
@@ -31,10 +31,10 @@ function LandingPage() {
           setRegisterErr("Server Error Sorry for the inconvenience");
         } else {
           setRegisterErr(error.info.error);
-          return;
         }
+      } else {
+        setRegisterErr("Oops, something went wrong. Please try again later.");
       }
-      setRegisterErr("Oops, something went wrong. Please try again later.");
     }
   };
   return (
