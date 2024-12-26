@@ -1,6 +1,6 @@
 import { AuthFormPayload, FormFieldsState } from "../features/types";
 
-export type FormField = {
+type FormField = {
   name: keyof FormFieldsState;
   type: string;
   label: string;
@@ -13,7 +13,23 @@ export interface AuthFormProps<T extends AuthFormPayload> {
   payloadData: T;
   formState: FormFieldsState;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMessage?: string;
+  errorObj: FormValidationError;
   submitLabel: string;
   handleSubmit: (e: React.FormEvent) => Promise<void>;
+}
+
+interface FormValidationError {
+  general: string;
+}
+
+export interface LoginFormValidationError extends FormValidationError {
+  password: string;
+  email: string;
+}
+
+export interface RegisterFormValidationError extends FormValidationError {
+  password: string;
+  email: string;
+  username: string;
+  repeatPassword: string;
 }

@@ -3,18 +3,30 @@ import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
-import { handleRegister } from "./features/auth/authHandlers";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./utils/ProtectedRoute";
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/signup" element={<SignUp onSubmit={handleRegister} />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
+
 
 export default App;

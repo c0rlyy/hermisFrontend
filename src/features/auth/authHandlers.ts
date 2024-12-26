@@ -4,7 +4,7 @@ import {
   LoginPayload,
   LoginRes,
   RegisterPayload,
-  RegisterRes
+  RegisterRes,
 } from "../types";
 
 export const handleRegister = async ({
@@ -12,12 +12,18 @@ export const handleRegister = async ({
   email,
   password,
 }: RegisterPayload): Promise<RegisterRes> => {
-  const payload: RegisterPayload = { username, email, password };
+  const formData = new URLSearchParams();
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("username", username);
 
   const response = await fetch("http://localhost:8080/api/register", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    credentials: "include",
+    body: formData.toString(),
   });
 
   if (!response.ok) {
@@ -38,7 +44,6 @@ export const handlerLogin = async ({
   email,
   password,
 }: LoginPayload): Promise<LoginRes> => {
-
   const formData = new URLSearchParams();
   formData.append("email", email);
   formData.append("password", password);
@@ -48,6 +53,7 @@ export const handlerLogin = async ({
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
+    credentials: "include",
     body: formData.toString(),
   });
 
