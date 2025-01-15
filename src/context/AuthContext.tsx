@@ -5,6 +5,7 @@ import {
   useState,
 } from "react";
 import { ApiError, CustomApiError } from "../features/types";
+import Loading from "../components/Loader";
 
 export interface User {
   schoolId?: string;
@@ -76,7 +77,7 @@ export function AuthProvider({ children }: MyProviderProps) {
   }, []);
 
   if (isLoggedIn === null) {
-    return <div>Loading...</div>;
+    return <Loading message="Loading..."></Loading>;
   }
 
   return (

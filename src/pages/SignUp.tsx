@@ -53,7 +53,7 @@ function SignUp() {
       }));
       return;
     }
-     
+
     try {
       const response = await handleRegister(payloadData);
       console.log(response);
@@ -83,8 +83,8 @@ function SignUp() {
   return (
     <>
       <LoginHeader></LoginHeader>
-      <div className="max-w-lg sm:max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg ">
-        <AuthForm<RegisterPayload>
+      <div className="max-w-md mx-auto p-4 bg-pastelPinkBg-50 rounded-lg shadow-md">
+        <AuthForm<RegisterPayload, RegisterFormValidationError>
           formFields={formFields}
           formState={formState}
           handleChange={handleChange}

@@ -1,14 +1,14 @@
-import { AuthFormProps } from "./types";
+import { AuthFormProps, FormValidationError } from "./types";
 import { AuthFormPayload } from "../features/types";
 
-export function AuthForm<T extends AuthFormPayload>({
+export function AuthForm<T extends AuthFormPayload, S extends FormValidationError>({
   formFields,
   formState,
   handleChange,
   errorObj,
   submitLabel,
   handleSubmit,
-}: AuthFormProps<T>) {
+}: AuthFormProps<T,S>) {
   return (
     <form onSubmit={handleSubmit} className="">
       {formFields.map((field) => (
@@ -36,7 +36,7 @@ export function AuthForm<T extends AuthFormPayload>({
 
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        className="w-full py-2 px-4 bg-yellow-100 text-blue-800 rounded-md hover:bg-yellow-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       >
         {submitLabel}
       </button>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthForm from "../components/AuthForm";
 import { FormFields, LoginFormValidationError } from "../components/types";
 import { handlerLogin } from "../features/auth/authHandlers";
@@ -10,10 +10,8 @@ import LoginHeader from "../components/LandingHeader";
 
 function LandingPage() {
   const navigate = useNavigate();
-  const { isLoggedIn,setIsLoggedIn } = useAuth();
-  if (isLoggedIn){
-    navigate("/home")
-  }
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
+
   const { formState, handleChange } = useFormState({
     email: "",
     password: "",
@@ -24,6 +22,12 @@ function LandingPage() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/home");
+    }
+  }, [isLoggedIn, navigate]);
 
   const formFields: FormFields = [
     { name: "email", type: "email", label: "email" },
@@ -36,7 +40,7 @@ function LandingPage() {
     try {
       const response = await handlerLogin(formState);
       if (response) {
-        setIsLoggedIn(true)
+        setIsLoggedIn(true);
         navigate("/home");
       }
     } catch (error) {
@@ -64,8 +68,8 @@ function LandingPage() {
   return (
     <>
       <LoginHeader></LoginHeader>
-      <div className="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
-        <AuthForm<LoginPayload>
+      <div className="max-w-md mx-auto p-4 bg-pastelPinkBg-50 rounded-lg shadow-md">
+        <AuthForm<LoginPayload, LoginFormValidationError>
           formFields={formFields}
           formState={formState}
           handleChange={handleChange}

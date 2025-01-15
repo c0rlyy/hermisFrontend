@@ -1,6 +1,18 @@
 export type AuthFormPayload = RegisterPayload | LoginPayload;
 export type FormFieldsState = RegisterFormState | LoginFormState;
-export type AuthFormRes = RegisterRes | LoginRes
+export type AuthFormRes = RegisterRes | LoginRes;
+
+export class CustomApiError<T> extends Error {
+  info: T;
+  code: number;
+
+  constructor(message: string, info: T, code: number) {
+    super(message);
+    this.name = "CustomApiError";
+    this.info = info;
+    this.code = code;
+  }
+}
 
 export interface RegisterPayload {
   username: string;
@@ -16,26 +28,14 @@ export interface LoginPayload {
 export interface RegisterRes {
   id: string;
   username: string;
-  token: string;
 }
+
 export interface LoginRes {
-  token: string;
+  message: string;
 }
 
 export interface ApiError {
   error: string;
-}
-
-export class CustomApiError<T> extends Error {
-  info: T;
-  code: number;
-
-  constructor(message: string, info: T, code: number) {
-    super(message);
-    this.name = "CustomApiError";
-    this.info = info;
-    this.code = code;
-  }
 }
 
 export interface RegisterFormState {
