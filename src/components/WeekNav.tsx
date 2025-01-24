@@ -24,7 +24,7 @@ function WeekNav({
   return (
     <>
       <LeftArrow onClick={() => handleDateChangeArrow("previous")}></LeftArrow>
-      <h1 className="text-xl font-bold text-darkGray-50 bg justify-self-center">
+      <h1 className="text-lg font-extrabold font-mono bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-purple-200 to-blue-200 text-[#ffc484] justify-self-center">
         {trimmedDate}-{trimmedEndDate}
       </h1>
       <RightArrow onClick={() => handleDateChangeArrow("next")}></RightArrow>

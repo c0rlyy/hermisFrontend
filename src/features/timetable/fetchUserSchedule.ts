@@ -22,7 +22,9 @@ export const fetchUserSchedule = async ({
   });
 
   const url = `http://localhost:8080/api/test?${params.toString()}`;
-  const response = await fetch(url);
+  const response = await fetch(url,{
+    credentials:"include"
+  });
 
   if (!response.ok) {
     const info = await response.json();

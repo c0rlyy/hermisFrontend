@@ -11,7 +11,7 @@ function HamburgerMenu() {
   };
 
   return (
-    <div className="">
+    <>
       <button onClick={toggleMenu} className="p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -30,8 +30,8 @@ function HamburgerMenu() {
       </button>
 
       <div
-        className={`fixed top-0 left-0 z-50 bg-pastelPeach-50 h-full transition-all duration-500 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed top-0 left-0 z-50 bg-pastelPinkBg-50 h-full rounded-2xl transition-all duration-500 ease-in-out ${
+          isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
         } w-3/4`}
       >
         <div className="flex flex-col min-h-full">
@@ -55,7 +55,7 @@ function HamburgerMenu() {
           <Navbar />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

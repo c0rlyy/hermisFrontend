@@ -1,7 +1,7 @@
 import HamburgerMenu from "./HamburgerMenu";
 function Header() {
   return (
-    <header className="flex flex-col bg-pink-300  p-1 lg:p-4 text-purple-950 shadow-md text-center sticky top-0 ">
+    <header className="flex flex-col bg-pinktable-50  p-1 lg:p-4 text-purple-950 shadow-md text-center sticky top-0 ">
       <div className="grid grid-cols-5 lg:flex justify-center">
         <div className="sm:block md:block lg:hidden justify-self-start flex">
           <HamburgerMenu />

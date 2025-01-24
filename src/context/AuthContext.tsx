@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ApiError, CustomApiError } from "../features/types";
 import Loading from "../components/Loader";
 
@@ -27,31 +22,39 @@ export interface MyProviderProps {
   children: React.ReactNode;
 }
 
-const logout = async () => {
-  const response = await fetch("http://localhost:8080/api/logout", {
-    credentials: "include",
-    method: "POST",
-  });
-  if (!response.ok) {
-    const errorData: ApiError = await response.json();
-    const err = new CustomApiError<ApiError>(
-      "error while loggin out",
-      errorData,
-      response.status
-    );
-    throw err;
-  }
-  return await response.json()
-};
-
 const AuthContext = createContext<AuthContext | null>(null);
 
 export function AuthProvider({ children }: MyProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null); 
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+
+  const logout = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/logout", {
+        credentials: "include",
+        method: "POST",
+      });
+      if (!response.ok) {
+        const errorData: ApiError = await response.json();
+        const err = new CustomApiError<ApiError>(
+          "error while loggin out",
+          errorData,
+          response.status
+        );
+        throw err;
+      }
+      setIsLoggedIn(false);
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to fetch user sdata:", error);
+      setIsLoggedIn(false);
+      setUser(null);
+    }
+  };
 
   useEffect(() => {
     const fetchUser = async () => {
+      console.log("hello");
       try {
         const response = await fetch("http://localhost:8080/api/auth/me", {
           credentials: "include",

@@ -61,14 +61,16 @@ function Timetable() {
         setDateState((prev) => ({ ...prev, shouldDisplay: false }));
         console.log(error);
       } finally {
+        //TODO maybe have it here the sate chagne, useRef for the shouldDisplay dunno yet
         setIsLoading(false);
       }
     };
 
-    async function callItAsyncCozTheJsisLovley() {
-      await fetchTimeTableData();
-    }
-    callItAsyncCozTheJsisLovley();
+    // async function callItAsyncCozTheJsisLovley() {
+    //   await fetchTimeTableData();
+    // }
+    // callItAsyncCozTheJsisLovley();
+    fetchTimeTableData()
   }, [dateState.selectedDate]);
 
   if (isLoading) {
@@ -108,7 +110,8 @@ function Timetable() {
 
   return (
     <div className="lg:max-w-screen-2xl grid-rows-2 items-center justify-center self-center">
-      <div className="grid grid-flow-col bg-[#D0AEDF] rounded-t-2xl shadow-lg">
+      <div className="grid grid-flow-col bg-pastelPinkBg-50 rounded-t-2xl shadow-lg ">
+      {/* <div className="grid grid-flow-col bg-[#D0AEDF] rounded-t-2xl shadow-lg"> */}
         <WeekNav
           weekEndDay={closestWeekEndDay}
           weekStartDay={closestWeekendStartDay}
